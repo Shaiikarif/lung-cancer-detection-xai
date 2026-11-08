@@ -1,0 +1,104 @@
+# ==============================================================================
+# PulmoAI: Configuration File
+# Framework for Explainable & Robust Lung Cancer Detection from CT Scans
+# ==============================================================================
+
+project:
+  name: "lung-cancer-detection-xai"
+  version: "1.0.0"
+  random_seed: 42
+
+data:
+  raw_dir: "The IQ-OTHNCCD lung cancer dataset"
+  dataset_dir: "dataset"
+  train_split: 0.70
+  val_split: 0.15
+  test_split: 0.15
+  img_size: 224
+  num_classes: 3
+  class_names:
+    - "Normal"
+    - "Benign"
+    - "Malignant"
+  class_mapping:
+    "Normal cases": "Normal"
+    "Benign cases": "Benign"
+    "Malignant cases": "Malignant"
+    "normal": "Normal"
+    "benign": "Benign"
+    "malignant": "Malignant"
+  normalization:
+    mean: [0.485, 0.456, 0.406]
+    std: [0.229, 0.224, 0.225]
+
+model:
+  name: "ResNet50-CBAM"
+  backbone: "resnet50"
+  num_classes: 3
+  pretrained: true
+  dropout_rate: 0.5
+  classifier_hidden_dims: [512, 128]
+  attention:
+    enabled: true
+    reduction_ratio: 16
+    spatial_kernel_size: 7
+
+training:
+  batch_size: 32
+  num_workers: 2
+  pin_memory: true
+  num_epochs: 50
+  learning_rate: 0.0001
+  weight_decay: 0.0001
+  loss:
+    name: "FocalLoss"
+    gamma: 2.0
+    alpha: null  # Optional class weight tensor
+  scheduler:
+    name: "CosineAnnealingWarmRestarts"
+    T_0: 10
+    T_mult: 2
+    eta_min: 0.000001
+  early_stopping:
+    patience: 10
+    min_delta: 0.0001
+
+checkpoints:
+  dir: "checkpoints"
+  best_model_filename: "best_model.pth"
+  final_model_filename: "final_model.pth"
+
+explainability:
+  gradcam:
+    target_layer: "backbone.layer4"
+  lime:
+    num_samples: 500
+    num_features: 10
+  integrated_gradients:
+    steps: 50
+
+robustness:
+  fgsm:
+    epsilons: [0.0, 0.005, 0.01, 0.02, 0.03, 0.05]
+  corruptions:
+    gaussian_noise_stds: [0.05, 0.10]
+    blur_kernel_sizes: [3, 5]
+    brightness_factors: [0.8, 1.2]
+    occlusion_ratios: [0.1, 0.2]
+  uncertainty:
+    mc_samples: 30
+    uncertainty_threshold: 0.15
+    confidence_threshold: 0.70
+
+webapp:
+  host: "127.0.0.1"
+  port: 5000
+  upload_folder: "static/uploads"
+  results_folder: "static/results"
+  samples_folder: "static/samples"
+  max_content_length_mb: 16
+
+outputs:
+  dir: "outputs"
+  results_json: "outputs/final_results.json"
+  report_txt: "outputs/final_report.txt"

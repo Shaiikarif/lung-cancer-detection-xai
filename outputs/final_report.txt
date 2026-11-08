@@ -1,0 +1,54 @@
+======================================================================
+EXPLAINABLE & ROBUST AI FRAMEWORK FOR LUNG CANCER DETECTION
+FINAL RESULTS REPORT
+======================================================================
+
+1. OVERALL PERFORMANCE METRICS
+----------------------------------------
+   Accuracy:              0.9896 (98.96%)
+   Precision (Weighted):  0.9895
+   Recall (Weighted):     0.9896
+   F1 Score (Weighted):   0.9895
+   F1 Score (Macro):      0.9673
+   ROC-AUC (Micro Avg):   0.9999
+
+2. PER-CLASS PERFORMANCE
+----------------------------------------
+   Class           Precision    Recall       F1           AUC
+   Normal          0.9837       0.9918       0.9878       0.9998
+   Benign          0.9412       0.8889       0.9143       0.9990
+   Malignant       1.0000       1.0000       1.0000       1.0000
+
+3. MODEL ARCHITECTURE
+----------------------------------------
+   Base Model:        ResNet50 (pretrained on ImageNet)
+   Attention:         CBAM (Channel + Spatial Attention)
+   Classifier:        Custom FC layers with BatchNorm & Dropout
+   Loss Function:     Focal Loss (gamma=2.0)
+   Optimizer:         AdamW (lr=1e-4, weight_decay=1e-4)
+   Scheduler:         Cosine Annealing Warm Restarts
+
+4. EXPLAINABILITY METHODS USED
+----------------------------------------
+   - Grad-CAM (Gradient-weighted Class Activation Mapping)
+   - Grad-CAM++ (Improved version)
+   - LIME (Local Interpretable Model-agnostic Explanations)
+   - Integrated Gradients
+
+5. ROBUSTNESS EVALUATION
+----------------------------------------
+   - FGSM Adversarial Attack Testing
+   - Image Corruption Robustness (noise, blur, brightness, occlusion)
+   - MC Dropout Uncertainty Quantification
+
+6. DATASET
+----------------------------------------
+   Name:    IQ-OTH/NCCD Lung Cancer Dataset
+   Source:  Kaggle
+   Classes: Normal, Benign, Malignant
+   Split:   70% Train, 15% Validation, 15% Test
+
+======================================================================
+Note: This is an AI research tool for educational purposes.
+Not intended for clinical use without proper validation.
+======================================================================

@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use this software or framework in your research, please cite it as below."
+title: "PulmoAI: Explainable & Robust AI Framework for Early Lung Cancer Detection Using CT Scans"
+version: 1.0.0
+date-released: 2026-02-18
+url: "https://github.com/YOUR_USERNAME/lung-cancer-detection-xai"
+keywords:
+  - deep-learning
+  - lung-cancer-detection
+  - explainable-ai
+  - grad-cam
+  - pytorch
+  - computer-vision
+  - medical-imaging
+  - uncertainty-quantification
+license: MIT

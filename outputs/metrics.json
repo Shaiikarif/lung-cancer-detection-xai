@@ -1,0 +1,19 @@
+{
+    "test_accuracy": 0.9896193771626297,
+    "test_f1_score": 0.9894922674952333,
+    "test_loss": 0.010149470105071175,
+    "roc_auc": 0.9995765263107295,
+    "best_val_accuracy": 0.9965753424657534,
+    "total_training_time_minutes": 23.6,
+    "epochs_trained": 30,
+    "config": {
+        "data_dir": "dataset",
+        "batch_size": 32,
+        "img_size": 224,
+        "num_epochs": 30,
+        "learning_rate": 0.0001,
+        "weight_decay": 0.0001,
+        "patience": 10,
+        "num_classes": 3
+    }
+}
