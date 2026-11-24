@@ -10,11 +10,12 @@ The framework is developed and evaluated on the **IQ-OTH/NCCD Lung Cancer CT Dat
 - **Malignant:** 561 axial slices exhibiting primary pulmonary adenocarcinoma, squamous cell carcinoma, or aggressive metastatic lesions.
 - **Total Dataset Size:** 1,097 slices.
 
-### Data Partitioning:
-Stratified random sampling is conducted using seed `42`:
-- **Training Set (70%):** 767 slices
-- **Validation Set (15%):** 164 slices
-- **Test Set (15%):** 289 slices (Normal: 122, Benign: 18, Malignant: 149)
+### Data Partitioning (Certified Clean Splits):
+Stratified hash-clustered sampling is conducted using random seed `42` directly from the raw archive, ensuring all duplicate slice hashes are assigned exclusively to a single partition with zero cross-partition leakage:
+- **Training Set (70.01%):** 768 slices (Normal: 291, Benign: 84, Malignant: 393) — 743 unique SHA-256 hashes
+- **Validation Set (14.95%):** 164 slices (Normal: 62, Benign: 18, Malignant: 84) — 155 unique SHA-256 hashes
+- **Test Set (15.04%):** 165 slices (Normal: 63, Benign: 18, Malignant: 84) — 156 unique SHA-256 hashes
+- **Total:** 1,097 slices (1,054 unique SHA-256 hashes, exactly 0.0% cross-partition hash overlap).
 
 ---
 

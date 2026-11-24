@@ -51,6 +51,7 @@ The IQ-OTHNCCD lung cancer dataset/
 dataset/*
 !dataset/README.md
 !dataset/.gitkeep
+research_audit/clean_splits/data/
 
 # Medical image binaries & archives
 *.dcm
@@ -67,6 +68,8 @@ checkpoints/*.pt
 checkpoints/*.joblib
 !checkpoints/README.md
 !checkpoints/.gitkeep
+research_audit/checkpoints/*.pth
+research_audit/checkpoints/*.pt
 
 # ============================================================
 # Web Application Artifacts & Uploads

@@ -13,7 +13,12 @@
 ### 1.3 Format & Metadata Constraints
 - The dataset utilizes pre-windowed standard image formats (JPEG/PNG) rather than raw DICOM files with calibrated Hounsfield Units (HU). Calibrated HU windowing (e.g. lung window: $W=1500, L=-600$; mediastinal window: $W=350, L=50$) preserves radiodensity information lost in 8-bit conversions.
 
-### 1.4 Adversarial Vulnerability
+### 1.4 Patient-Level Independence & External Clinical Validation
+- **Slice-Level vs. Patient-Level Splitting:** The IQ-OTH/NCCD Kaggle distribution was de-identified by stripping all DICOM metadata, patient accession numbers, and z-axis acquisition orders, converting slices into flat JPEG files named with sequential numerical indices.
+- **Statistical Independence Boundary:** While PulmoAI's clean partition pipeline guarantees **zero SHA-256 hash overlap** and quarantines all duplicate slice groups to a single partition, **patient-level independence cannot be mathematically proven without original clinical DICOM accession tags**. Multiple distinct slices from a single patient's scan could theoretically exist across partitions if they exhibit varying anatomical cross-sections.
+- **External Clinical Validation:** The model has not been validated on external cohorts from independent medical centers (e.g., LIDC-IDRI, NLST, or multi-scanner clinical trials). Performance metrics may shift across different scanner manufacturers, tube voltages, reconstruction kernels, or slice thicknesses.
+
+### 1.5 Adversarial Vulnerability
 - Although the framework quantifies robustness against FGSM perturbations, adversarial defense (e.g. adversarial training or randomized smoothing) is not currently enabled, meaning deliberate or out-of-distribution adversarial noise can degrade model accuracy.
 
 ---

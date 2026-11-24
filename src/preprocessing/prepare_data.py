@@ -19,7 +19,8 @@ def organize_dataset(
     train_ratio: float = 0.70,
     val_ratio: float = 0.15,
     test_ratio: float = 0.15,
-    random_seed: int = 42
+    random_seed: int = 42,
+    clean_destination: bool = True
 ) -> bool:
     """Split raw downloaded Kaggle dataset into stratified train, val, and test splits.
 
@@ -30,6 +31,7 @@ def organize_dataset(
         val_ratio: Proportion of images allocated for validation.
         test_ratio: Proportion of images allocated for testing.
         random_seed: Seed for reproducibility.
+        clean_destination: If True, clear existing split folders before copying to prevent file accumulation.
 
     Returns:
         True if partitioning succeeded, False otherwise.
@@ -57,6 +59,9 @@ def organize_dataset(
     logger.info("Found raw dataset at: %s", raw_path)
 
     for split in ["train", "val", "test"]:
+        split_folder = out_path / split
+        if clean_destination and split_folder.exists():
+            shutil.rmtree(split_folder)
         for cls in ["normal", "benign", "malignant"]:
             (out_path / split / cls).mkdir(parents=True, exist_ok=True)
 

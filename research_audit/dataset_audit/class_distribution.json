@@ -1,0 +1,53 @@
+{
+    "raw_dataset_total_images": 1097,
+    "raw_dataset_unique_hashes": 1054,
+    "raw_dataset_class_distribution": {
+        "Benign": 120,
+        "Malignant": 561,
+        "Normal": 416
+    },
+    "historical_dataset_total_images": 1549,
+    "historical_dataset_unique_hashes": 1054,
+    "historical_splits": {
+        "train": {
+            "Benign": 84,
+            "Malignant": 501,
+            "Normal": 383
+        },
+        "val": {
+            "Benign": 18,
+            "Malignant": 159,
+            "Normal": 115
+        },
+        "test": {
+            "Benign": 18,
+            "Malignant": 149,
+            "Normal": 122
+        }
+    },
+    "historical_leakage_forensics": {
+        "train_unique_hashes": 934,
+        "val_unique_hashes": 290,
+        "test_unique_hashes": 287,
+        "train_test_overlapping_hashes": 199,
+        "val_test_overlapping_hashes": 53,
+        "train_val_overlapping_hashes": 207,
+        "test_images_in_train_by_class": {
+            "Normal": {
+                "total_in_test": 122,
+                "duplicated_in_train": 98,
+                "leakage_percentage": 80.33
+            },
+            "Malignant": {
+                "total_in_test": 149,
+                "duplicated_in_train": 98,
+                "leakage_percentage": 65.77
+            },
+            "Benign": {
+                "total_in_test": 18,
+                "duplicated_in_train": 4,
+                "leakage_percentage": 22.22
+            }
+        }
+    }
+}
